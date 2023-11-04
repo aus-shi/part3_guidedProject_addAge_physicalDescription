@@ -287,7 +287,52 @@ do
 
         case "3":
             // Ensure animal ages and physical descriptions are complete
-            // int petWithNoName = 0;
+            // Console.WriteLine($"Current number of pet(s): {petCount}");
+            string checkPetAge = "";
+            int thePetAge = 0;
+
+            for (int i = 0; i < maxPets; i++)
+            {
+                if (ourAnimals[i, 0] != "ID #: ")
+                {
+                    checkPetAge = ourAnimals[i, 2];
+                    if (checkPetAge == "Age: ?")
+                    {
+                        bool isValidInput = false;
+
+                        do
+                        {
+                            Console.WriteLine($"Enter an age for {ourAnimals[i, 0]}");
+                            string userInput = Console.ReadLine();
+
+                            if (int.TryParse(userInput, out thePetAge))
+                            {
+                                isValidInput = true;
+                            }
+                        } while (!isValidInput);
+
+                        Console.WriteLine($"The entered age is: {thePetAge}");
+                        animalAge = thePetAge.ToString();
+                        ourAnimals[i, 2] = "Age: " + animalAge;
+                        Console.WriteLine("Age fields are complete for all of our friends. ");
+                    }
+                    else if (ourAnimals[i, 4] == "Physical description: " || ourAnimals[i, 4] == "Physical description: tbd")
+                    {
+                        do
+                        {
+                            Console.WriteLine($"Enter a physical description for {ourAnimals[i, 0]} (size, color, breed, gender, weight, housebroken)");
+                            readResult = Console.ReadLine();
+                            if (readResult != null)
+                            {
+                                animalPhysicalDescription = readResult.ToLower();
+                                ourAnimals[i, 4] = "Physical Description: " + animalPhysicalDescription;
+                                Console.WriteLine("Physical description fields are complete for all of our friends. ");
+                            }
+                        } while (readResult == "");
+                    }
+                }
+            }
+
             Console.WriteLine("Press the Enter key to continue.");
             readResult = Console.ReadLine();
             break;
