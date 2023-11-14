@@ -336,20 +336,57 @@ do
 
         case "4":
             // Ensure animal nicknames and personality descriptions are complete
+            string? petNickName;
+            bool setPetNickName = false;
+
+            string? petPersonality;
+            bool setPetPersonality = false;
             for (int i = 0; i < maxPets; i++)
             {
                 if (ourAnimals[i, 0] != "ID #: ")
                 {
-                    petCount += 1;
-                }
-                // for (int j = 0; j < petCount; j++)
-                // {
 
+                    if (ourAnimals[i, 3] == "Nickname: " || ourAnimals[i, 3] == "Nickname: tbd" || ourAnimals[i, 5] == "Personality: " || ourAnimals[i, 5] == "Personality: tbd")
+                    {
+                        // Console.WriteLine($"{ourAnimals[i, 3]}");
+                        Console.WriteLine($"Nickname for this {ourAnimals[i, 0]} is still empty.\nPlease fill in: ");
+                        do
+                        {
+                            readResult = Console.ReadLine();
+                            if (readResult != null)
+                            {
+                                petNickName = readResult.ToUpper();
+                                setPetNickName = true;
+                                ourAnimals[i, 3] = "Nickname: " + petNickName;
+                            }
+
+
+                        } while (!setPetNickName);
+
+
+                        do
+                        {
+                            Console.WriteLine($"Pet personality {ourAnimals[i, 0]} is blank. Please fill in: ");
+                            readResult = Console.ReadLine();
+                            if (readResult != null)
+                            {
+                                petPersonality = readResult.ToLower();
+                                ourAnimals[i, 5] = "Personality: " + petPersonality;
+                                setPetPersonality = true;
+                            }
+
+                        } while (!setPetPersonality);
+                    }
+
+                }
+                // else if (ourAnimals[i, 0] != "ID #: " && ourAnimals[i, 5] == "Personality: ")
+                // {
+                //     Console.WriteLine($"{ourAnimals[i, 0]} has no Personality yet.");
+                //     Console.ReadLine();
                 // }
-                Console.WriteLine($"Count:{petCount}");
             }
 
-            Console.WriteLine("Challenge Project - please check back soon to see progress.");
+            Console.WriteLine("All pets has its own Nick Name and Personality. ");
             Console.WriteLine("Press the Enter key to continue.");
             readResult = Console.ReadLine();
             break;
