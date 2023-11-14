@@ -386,7 +386,7 @@ do
                 // }
             }
 
-            Console.WriteLine("All pets has its own Nick Name and Personality. ");
+            Console.WriteLine("All pets has its own Nick Name and Personality ");
             Console.WriteLine("Press the Enter key to continue.");
             readResult = Console.ReadLine();
             break;
